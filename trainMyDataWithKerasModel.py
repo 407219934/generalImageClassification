@@ -1,8 +1,8 @@
-from keras.applications.inception_v3 import InceptionV3
-from keras.preprocessing.image import ImageDataGenerator
-from keras.preprocessing import image
-from keras.models import Model
-from keras.layers import Dense, GlobalAveragePooling2D
+from keras._tf_keras.keras.applications.inception_v3 import InceptionV3
+from keras._tf_keras.keras.preprocessing.image import ImageDataGenerator
+from keras._tf_keras.keras.preprocessing import image
+from keras._tf_keras.keras.models import Model
+from keras._tf_keras.keras.layers import Dense, GlobalAveragePooling2D
 from keras import backend as K
 import numpy as np
 from PIL import ImageFile
@@ -71,8 +71,10 @@ train_generator = train_datagen.flow_from_directory( # 使用.flow_from_director
     class_mode='categorical',
     # classes = ["neutral","political","porn","terrorism"]
 )
+print("class...................")
 print(train_generator.class_indices) #{'neutral': 0, 'political': 1, 'porn': 2, 'terrorism': 3}
 
+print(train_generator.classes)
 
 validation_generator = valid_datagen.flow_from_directory(
     validation_data_dir,
@@ -80,11 +82,12 @@ validation_generator = valid_datagen.flow_from_directory(
     batch_size=batch_size,
     class_mode='categorical',
 )
-print(validation_generator.class_indices) # 输出生成的label名称 {'neutral': 0, 'political': 1, 'porn': 2, 'terrorism': 3}
+print(validation_generator) # 输出生成的label名称 {'neutral': 0, 'political': 1, 'porn': 2, 'terrorism': 3}
 
+print(train_generator)
 ### 在新的数据集上训练几代
 print("开始训练：")
-model.fit_generator(
+model.fit(
     train_generator,
     steps_per_epoch = nb_train_samples // batch_size, # 一个 epoch 完成并开始下一个 epoch 之前,如果未指定，将使用len(generator) 作为步数。
     epochs = epochs,

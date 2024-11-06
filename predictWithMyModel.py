@@ -3,8 +3,8 @@ import numpy as np
 import base64
 from io import BytesIO
 import logging
-from keras.models import load_model
-from keras.preprocessing import image
+from keras._tf_keras.keras.models import load_model
+from keras._tf_keras.keras.preprocessing import image
 from keras import backend as K
 from PIL import ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 print("开始加载模型：")
 logger.info("开始加载模型")
 starttime = timeit.default_timer()
-model = load_model('data/modelFile/my_model02.h5')
+model = load_model('data/modelFile/my_model.h5')
 endtime = timeit.default_timer()
 print("模型加载完成，用时为：", endtime - starttime)
 logger.info("模型加载完成，用时为：%s", endtime - starttime)
@@ -104,16 +104,9 @@ def predictWithImageBase64(imageBase64String):
 
 if __name__ == '__main__':
     img_path_list = [
-        "data/validation/neutral/[www.google.com][1989].jpg",  # neutral
-        "data/validation/neutral/[www.google.com][12706].jpg",  # neutral
-        "data/validation/neutral/[www.google.com][396].jpg",  # neutral
-        "data/validation/neutral/[www.google.com][18507].jpg",  # neutral
-        "data/validation/political/[www.google.com][49474].jpg",  # political
-        "data/validation/political/[www.google.com][96367].jpg",  # political
-        "data/validation/porn/184860_06big.jpg",  # porn
-        "data/validation/porn/[www.google.com][23921].jpg",  # porn
-        "data/validation/terrorism/[www.google.com][76135].jpg",  # terrorism
-        "data/validation/terrorism/[www.google.com][46334].jpg",  # terrorism
+
+        "data/validation/neutral/[www.google.com][396].jpg"  # neutral
+
     ]
     print("开始预测：")
     for i in img_path_list:
